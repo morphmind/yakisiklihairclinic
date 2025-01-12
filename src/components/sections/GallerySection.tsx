@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
+import { VideoModal } from '@/components/ui/video-modal';
 import { Button } from '@/components/ui/button';
+import { Calendar, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
   ChevronRight,
@@ -28,6 +30,7 @@ const cases = [
     grafts: 4500,
     age: 32,
     testimonial: {
+      videoId: 'QvzQlwSnzTQ',
       name: 'John D.',
       country: '🇬🇧 UK',
       rating: 5,
@@ -43,6 +46,7 @@ const cases = [
     grafts: 2500,
     age: 28,
     testimonial: {
+      videoId: 'QvzQlwSnzTQ',
       name: 'Michael S.',
       country: '🇩🇪 Germany',
       rating: 5,
@@ -51,13 +55,30 @@ const cases = [
   },
   {
     id: 3,
-    type: 'women',
-    beforeImage: 'https://glokalizm.com/yakisikli/img/cases/women-before-1.jpg',
-    afterImage: 'https://glokalizm.com/yakisikli/img/cases/women-after-1.jpg',
+    type: 'men',
+    beforeImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10a.jpg',
+    afterImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10b.jpg',
     timeframe: 'month12',
     grafts: 3000,
     age: 45,
     testimonial: {
+      videoId: 'QvzQlwSnzTQ',
+      name: 'Sarah M.',
+      country: '🇫🇷 France',
+      rating: 5,
+      text: 'Dr. Yakışıklı and his team were amazing. My hair looks beautiful and natural.'
+    }
+  },
+    {
+    id: 4,
+    type: 'women',
+    beforeImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10a.jpg',
+    afterImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10b.jpg',
+    timeframe: 'month12',
+    grafts: 3000,
+    age: 45,
+    testimonial: {
+      videoId: 'QvzQlwSnzTQ',
       name: 'Sarah M.',
       country: '🇫🇷 France',
       rating: 5,
@@ -73,6 +94,7 @@ export function GallerySection() {
   const [hoveredCase, setHoveredCase] = useState<number | null>(null);
   const [sliderPosition, setSliderPosition] = useState<Record<number, number>>({});
   const [isDragging, setIsDragging] = useState<Record<number, boolean>>({});
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const sliderRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
   const filters = [
@@ -334,9 +356,14 @@ export function GallerySection() {
                           <span className="text-sm font-medium">{item.testimonial.name}</span>
                           <span className="text-sm text-muted-foreground">{item.testimonial.country}</span>
                         </div>
-                        <Button variant="ghost" size="sm" className="h-8 gap-2">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-8 gap-2"
+                          onClick={() => setActiveVideo(item.testimonial.videoId)}
+                        >
                           <Play className="w-3.5 h-3.5" />
-                          <span className="text-xs">Watch Story</span>
+                          <span className="text-xs">{t.treatments.gallery.labels.watchStory}</span>
                         </Button>
                       </div>
                     </div>
@@ -347,8 +374,7 @@ export function GallerySection() {
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
           <Button
             size="lg"
             className="bg-primary hover:bg-primary/90 text-white w-full sm:w-auto h-12 px-8 text-base"
@@ -366,7 +392,27 @@ export function GallerySection() {
             {t.treatments.gallery.cta.whatsapp}
           </Button>
         </div>
+
       </div>
+      
+      {/* Video Modal */}
+      <VideoModal
+        videoId={activeVideo || ''}
+        isOpen={!!activeVideo}
+        onClose={() => setActiveVideo(null)}
+        onExternalClick={() => {
+          window.open(`https://www.youtube.com/watch?v=${activeVideo}`, '_blank');
+          setActiveVideo(null);
+        }}
+        translations={{
+          watchOnYoutube: t.treatments.gallery.labels.watchOnYoutube,
+          cta: {
+            whatsapp: t.treatments.gallery.cta.whatsapp,
+            schedule: t.treatments.gallery.cta.schedule,
+            call: t.treatments.gallery.cta.call
+          }
+        }}
+      />
     </div>
   );
 }

@@ -286,7 +286,9 @@ export const en = {
       },
       labels: {
         before: 'Before',
-        after: 'After'
+        after: 'After',
+        watchStory: 'Watch Story',
+        watchOnYoutube: 'Watch on YouTube'
       },
       testimonial: {
         title: 'Patient Stories',
@@ -294,7 +296,9 @@ export const en = {
       },
       cta: {
         analyze: 'Get Your Free Analysis',
-        whatsapp: 'Consult on WhatsApp'
+        whatsapp: 'Chat on WhatsApp',
+        schedule: 'Schedule Consultation',
+        call: 'Call Now'
       }
     },
     options: {

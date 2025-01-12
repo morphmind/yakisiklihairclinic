@@ -284,7 +284,9 @@ export const tr = {
       },
       labels: {
         before: 'Öncesi',
-        after: 'Sonrası'
+        after: 'Sonrası',
+        watchStory: 'Hikayeyi İzle',
+        watchOnYoutube: 'YouTube\'da İzle'
       },
       testimonial: {
         title: 'Hasta Hikayeleri',
@@ -292,7 +294,9 @@ export const tr = {
       },
       cta: {
         analyze: 'Ücretsiz Analiz Al',
-        whatsapp: 'WhatsApp\'tan Danış'
+        whatsapp: 'WhatsApp\'tan Yazın',
+        schedule: 'Konsültasyon Planla',
+        call: 'Hemen Ara'
       }
     },
     options: {
