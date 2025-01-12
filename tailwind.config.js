@@ -73,4 +73,8 @@ export default {
     },
   },
   plugins: [animate],
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> d3fec019217f64956a814091f39b1021d2042385
