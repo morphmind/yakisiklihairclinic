@@ -51,9 +51,24 @@ const cases = [
   },
   {
     id: 3,
+    type: 'men',
+    beforeImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10a.jpg',
+    afterImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10b.jpg',
+    timeframe: 'month12',
+    grafts: 3000,
+    age: 45,
+    testimonial: {
+      name: 'Sarah M.',
+      country: '🇫🇷 France',
+      rating: 5,
+      text: 'Dr. Yakışıklı and his team were amazing. My hair looks beautiful and natural.'
+    }
+  },
+    {
+    id: 4,
     type: 'women',
-    beforeImage: 'https://glokalizm.com/yakisikli/img/cases/women-before-1.jpg',
-    afterImage: 'https://glokalizm.com/yakisikli/img/cases/women-after-1.jpg',
+    beforeImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10a.jpg',
+    afterImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10b.jpg',
     timeframe: 'month12',
     grafts: 3000,
     age: 45,
