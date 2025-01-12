@@ -103,12 +103,17 @@ export default function Header({ selectedCurrency, onCurrencyChange }: HeaderPro
                 </div>
                 <span>{t.header.contact.phone}</span>
               </a>
-              <div className="flex items-center gap-2 text-sm font-medium text-white/90">
+              <a 
+                href="https://www.google.com/maps/dir/?api=1&destination=36.63533942935868,29.128419837434883&destination_place_id=ChIJXXXXXXXXXXXXXXXXXXX"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-medium text-white/90 hover:text-white transition-colors"
+              >
                 <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
                   <MapPin className="h-3.5 w-3.5" />
                 </div>
                 <span>{t.header.contact.location}</span>
-              </div>
+              </a>
 
               {!error && weather && (
                 <div className="relative group inline-flex ml-2">
@@ -377,10 +382,15 @@ export default function Header({ selectedCurrency, onCurrencyChange }: HeaderPro
                         <Phone className="h-4 w-4" />
                         <span>{t.header.contact.phone}</span>
                       </a>
-                      <div className="flex items-center gap-2 text-sm">
+                      <a 
+                        href="https://www.google.com/maps/dir/?api=1&destination=36.63533942935868,29.128419837434883&destination_place_id=ChIJXXXXXXXXXXXXXXXXXXX"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm hover:text-primary transition-colors"
+                      >
                         <MapPin className="h-4 w-4" />
                         <span>{t.header.contact.location}</span>
-                      </div>
+                      </a>
                     </div>
                     
                     {/* Social Links */}

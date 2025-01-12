@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import HairAnalysis from './pages/hair-analysis';
@@ -15,14 +14,23 @@ import { GallerySection } from './components/sections/GallerySection';
 import { SectionDivider } from './components/ui/section-divider';
 import { Toaster } from './components/ui/toaster';
 import { useTheme } from './hooks/useTheme';
+import { LocaleContext } from './contexts/LocaleContext';
+import { getLocalizedSEO, updateMetaTags } from './utils/seo';
 
 function App() {
   const { selectedCurrency, updateCurrency } = useCurrency();
   const { theme } = useTheme();
+  const { currentLocale } = useContext(LocaleContext);
 
   useEffect(() => {
     document.documentElement.className = theme;
   }, [theme]);
+
+  // Update meta tags when language changes
+  useEffect(() => {
+    const seoConfig = getLocalizedSEO(currentLocale);
+    updateMetaTags(seoConfig);
+  }, [currentLocale]);
 
   return (
     <LocaleProvider>
