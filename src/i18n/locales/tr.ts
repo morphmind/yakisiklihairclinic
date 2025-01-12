@@ -428,6 +428,88 @@ export const tr = {
     bookConsultation: 'Ücretsiz Konsültasyon',
     toggleMenu: 'Menüyü aç/kapat',
   },
+  pricing: {
+    badge: 'Şeffaf Fiyat Politikası',
+    title: 'Fiyatlarımız',
+    description: 'Saç ekimi operasyonunuz için net ve şeffaf fiyatlandırma. Tüm paketlerimiz VIP transfer ve 5 yıldızlı otel konaklaması içerir.',
+    graftNote: 'Tam greft sayısı Dr. Yakışıklı tarafından konsültasyon sırasında belirlenecektir.',
+    securePayment: 'Güvenli ödeme seçenekleri',
+    guide: {
+      title: 'Hangi Paketi Seçmelisiniz?',
+      description: 'Size en uygun paketi seçmenize yardımcı olalım',
+      content: 'Doğru seçimi yapmak için paketlerimizi detaylı incelemenizi öneririz. İhtiyaçlarınıza en uygun paketi seçtiğinizde, bir sonraki adıma geçmeye hazırsınız demektir.',
+      help: 'Paket seçiminde yardıma mı ihtiyacınız var? Ücretsiz danışmanlık için bizimle iletişime geçin. Size en uygun seçeneği birlikte belirleyelim.',
+      cta: {
+        analysis: 'Ücretsiz Saç Analizi',
+        contact: 'İletişime Geçin'
+      }
+    },
+    packages: {
+      fue: {
+        title: 'FUE ALTIN',
+        description: '(4.000 grefte kadar) + 5.500 grefte kadar megaseans için 900 €',
+        features: {
+          placement: 'Forseps',
+          technique: 'Safir Bıçak',
+          items: [
+            'Dr. Yakışıklı\'nın Konsültasyonu ve Saç Çizgisi Tasarımı',
+            'Tek ve Çoklu Greft Hazırlığı için HD Mikroskop',
+            'Ertesi Gün Sonuç Kontrolü',
+            'Kişisel Arkadaş ve Tercüman',
+            '5 Yıldızlı Otel Konaklaması',
+            'VIP Alım ve Transferler',
+            'FotoFinder Trichoscale AI Donör Alanı Saç Analizi',
+            'Oksijen Terapi Tedavisi'
+          ]
+        }
+      },
+      dhi: {
+        title: 'DHI SAFİR',
+        description: '(4.000 grefte kadar) + 5.500 grefte kadar megaseans için 900 €',
+        popular: 'En popüler',
+        features: {
+          placement: 'DHI İmplanter Kalemi',
+          technique: 'Mikro Safir Bıçak',
+          items: [
+            'Dr. Yakışıklı\'nın Konsültasyonu ve Saç Çizgisi Tasarımı',
+            'Tek ve Çoklu Greft Hazırlığı için HD Mikroskop',
+            'Ertesi Gün Sonuç Kontrolü',
+            'Kişisel Arkadaş ve Tercüman',
+            '5 Yıldızlı Otel Konaklaması',
+            'VIP Alım ve Transferler',
+            'FotoFinder Trichoscale AI Donör Alanı Saç Analizi',
+            'Oksijen Terapi Tedavisi',
+            '2 Aylık Saç Güçlendirme Paketi'
+          ]
+        }
+      },
+      vip: {
+        title: 'VIP DHI SAFIR',
+        description: '(4.000 grefte kadar) + 5.500 grefte kadar megaseans için 1000 €',
+        features: {
+          placement: 'DHI İmplanter Kalemi',
+          technique: 'Mikro Safir Bıçak',
+          items: [
+            'Dr. Yakışıklı\'nın Konsültasyonu ve Saç Çizgisi Tasarımı',
+            'Dr. Yakışıklı\'nın ameliyat kesisi',
+            'Tek ve Çoklu Greft Hazırlığı için HD Mikroskop',
+            'Ertesi Gün Sonuç Kontrolü',
+            'Kişisel Arkadaş ve Tercüman',
+            '5 Yıldızlı Otel Konaklaması',
+            'VIP Alım ve Transferler',
+            'FotoFinder Trichoscale AI Donör Alanı Saç Analizi',
+            'Oksijen Terapi Tedavisi',
+            '4 Aylık Saç Güçlendirme Paketi'
+          ]
+        }
+      },
+      labels: {
+        placement: 'Yerleştirme',
+        technique: 'Teknik',
+        whatsapp: 'WhatsApp\'tan Bilgi Al'
+      }
+    }
+  },
   hairAnalysis: {
     toast: {
       error: {
@@ -446,6 +528,13 @@ export const tr = {
     },
     title: 'Ücretsiz Saç Analizi Konsültasyonu',
     description: 'Uzman medikal ekibimizden kişiselleştirilmiş saç ekimi değerlendirmesi alın. Durumunuzu analiz edip saç restorasyon yolculuğunuz için özel öneriler sunacağız.',
+    navigation: {
+      back: 'Geri',
+      next: 'İleri',
+      previous: 'Önceki',
+      forward: 'İleri',
+      step: 'ADIM'
+    },
     steps: {
       personal: {
         title: 'Cinsiyetiniz',
@@ -618,14 +707,14 @@ export const tr = {
         medical: 'Tıbbi geçmişiniz, güvenli ve başarılı bir prosedür sağlamak için çok önemlidir. Herhangi bir alerji, durum veya ilaç tedavi planınızı ve iyileşmenizi etkileyebilir.',
         photos: 'Net fotoğraflar durumunuzun en doğru şekilde değerlendirilmesine yardımcı olur.',
         final: 'Neredeyse bitti! Lütfen iletişim bilgilerinizi paylaşın ki vakınızın detaylı analizini gönderelim ve ihtiyaçlarınıza en uygun tedavi seçeneklerini görüşebilelim. Bilgileriniz güvende ve yalnızca saç ekimi konsültasyonunuz için sizinle iletişime geçmek amacıyla kullanılacaktır.'
-      }
+      },
     },
-		  navigation: {
-      previous: "Önceki",
-      next: "İleri",
-      back: "Geri",
-      forward: "Sonraki",
-      step: "ADIM"
+    navigation: {
+      back: 'Geri',
+      next: 'İleri',
+      previous: 'Önceki',
+      forward: 'Sonraki',
+      step: 'ADIM',
     }
   }
 };

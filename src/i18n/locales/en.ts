@@ -430,7 +430,89 @@ export const en = {
     bookConsultation: 'Book Free Consultation',
     toggleMenu: 'Toggle menu',
   },
- hairAnalysis: {
+  pricing: {
+    badge: 'Transparent Pricing',
+    title: 'Our Packages',
+    description: 'Clear and transparent pricing for your hair transplant operation. All packages include VIP transfers and 5-star hotel accommodation.',
+    graftNote: 'The exact number of grafts will be determined by Dr. Yakışıklı during the consultation.',
+    securePayment: 'Secure payment options',
+    guide: {
+      title: 'Which Package Should You Choose?',
+      description: 'Let us help you select the perfect package',
+      content: 'We recommend carefully reviewing our packages to make the right choice. Once you\'ve identified the package that best suits your needs, you\'re ready to move forward.',
+      help: 'Need help choosing a package? Contact us for a free consultation. Let\'s find the perfect option for you together.',
+      cta: {
+        analysis: 'Free Hair Analysis',
+        contact: 'Contact Us'
+      }
+    },
+    packages: {
+      fue: {
+        title: 'FUE GOLD',
+        description: '(Up to 4,000 grafts) + 900 € for mega session up to 5,500 grafts',
+        features: {
+          placement: 'Forceps',
+          technique: 'Sapphire Blade',
+          items: [
+            'Consultation and Hairline Design by Dr. Yakışıklı',
+            'HD Microscope for Single and Multiple Graft Preparation',
+            'Next Day Result Check',
+            'Personal Friend and Interpreter',
+            '5-Star Hotel Accommodation',
+            'VIP Pickup and Transfers',
+            'FotoFinder Trichoscale AI Donor Area Hair Analysis',
+            'Oxygen Therapy Treatment'
+          ]
+        }
+      },
+      dhi: {
+        title: 'DHI SAPPHIRE',
+        description: '(Up to 4,000 grafts) + 900 € for mega session up to 5,500 grafts',
+        popular: 'Most Popular',
+        features: {
+          placement: 'DHI Implanter Pen',
+          technique: 'Micro Sapphire Blade',
+          items: [
+            'Consultation and Hairline Design by Dr. Yakışıklı',
+            'HD Microscope for Single and Multiple Graft Preparation',
+            'Next Day Result Check',
+            'Personal Friend and Interpreter',
+            '5-Star Hotel Accommodation',
+            'VIP Pickup and Transfers',
+            'FotoFinder Trichoscale AI Donor Area Hair Analysis',
+            'Oxygen Therapy Treatment',
+            '2 Months Hair Enhancement Package'
+          ]
+        }
+      },
+      vip: {
+        title: 'VIP DHI SAPPHIRE',
+        description: '(Up to 4,000 grafts) + 1000 € for mega session up to 5,500 grafts',
+        features: {
+          placement: 'DHI Implanter Pen',
+          technique: 'Micro Sapphire Blade',
+          items: [
+            'Consultation and Hairline Design by Dr. Yakışıklı',
+            'Surgery performed by Dr. Yakışıklı',
+            'HD Microscope for Single and Multiple Graft Preparation',
+            'Next Day Result Check',
+            'Personal Friend and Interpreter',
+            '5-Star Hotel Accommodation',
+            'VIP Pickup and Transfers',
+            'FotoFinder Trichoscale AI Donor Area Hair Analysis',
+            'Oxygen Therapy Treatment',
+            '4 Months Hair Enhancement Package'
+          ]
+        }
+      },
+      labels: {
+        placement: 'Placement',
+        technique: 'Technique',
+        whatsapp: 'Get Info on WhatsApp'
+      }
+    }
+  },
+  hairAnalysis: {
     toast: {
       error: {
         title: "Error",
@@ -448,6 +530,13 @@ export const en = {
     },
     title: 'Free Hair Analysis Consultation',
     description: 'Get a personalized hair transplant assessment from our expert medical team. We\'ll analyze your condition and provide tailored recommendations for your hair restoration journey.',
+    navigation: {
+      back: 'Back',
+      next: 'Next',
+      previous: 'Previous',
+      forward: 'Forward',
+      step: 'STEP'
+    },
     steps: {
       personal: {
         title: 'You are',
@@ -483,11 +572,12 @@ export const en = {
         options: { 
           years: 'years',
           moreThan: 'More than'
-        }
+        },
       },
       previous: {
         title: 'Have you ever had a hair transplant?',
         description: 'Previous treatments are important for planning',
+        doctorMessage: 'Hereditary hair loss (androgenetic alopecia) is often the cause of hair loss',
         options: {
           yes: {
             title: 'Yes',
@@ -512,26 +602,27 @@ export const en = {
             'more-than-5': 'More than 5 years'
           }
         },
+        doctorMessage: 'The details of your previous transplant help us understand your hair restoration journey and determine the best approach for achieving your desired results.',
         date: {
           title: 'When did you have your previous transplant?',
-          placeholder: 'Select date'
+          placeholder: 'Select date',
         },
         clinic: {
           title: 'Where did you have your transplant?',
-          placeholder: 'Enter clinic name and location'
+          placeholder: 'Enter clinic name and location',
         },
         grafts: {
           title: 'How many grafts were transplanted?',
-          placeholder: 'Enter number of grafts'
+          placeholder: 'Enter number of grafts',
         },
         technique: {
           title: 'Which technique was used?',
-          placeholder: 'e.g., FUE, DHI, etc.'
+          placeholder: 'e.g., FUE, DHI, etc.',
         },
         results: {
           title: 'How satisfied are you with the results?',
-          placeholder: 'Please describe your experience and results'
-        }
+          placeholder: 'Please describe your experience and results',
+        },
       },
       medical: {
         title: 'Medical History',
@@ -541,17 +632,18 @@ export const en = {
           yes: 'Yes',
           no: 'No'
         },
+        doctorMessage: 'Your medical history is essential for ensuring a safe and successful procedure. Any allergies, conditions, or medications can impact your treatment plan and recovery.',
         allergies: {
           title: 'Do you have any allergies?',
-          placeholder: 'List any allergies to medications or other substances'
+          placeholder: 'List any allergies to medications or other substances',
         },
         conditions: {
           title: 'Do you have any chronic medical conditions?',
-          placeholder: 'List any ongoing medical conditions'
+          placeholder: 'List any ongoing medical conditions',
         },
         medications: {
           title: 'What medications are you currently taking?',
-          placeholder: 'List all current medications and supplements'
+          placeholder: 'List all current medications and supplements',
         }
       },
       photos: {
@@ -565,22 +657,22 @@ export const en = {
         types: {
           front: {
             title: 'Front View',
-            description: 'Clear photo of your hairline'
+            description: 'Clear photo of your hairline',
           },
           top: {
             title: 'Top View',
-            description: 'Shows crown area clearly'
+            description: 'Shows crown area clearly',
           },
           sides: {
             title: 'Side Views',
-            description: 'Both left and right sides'
+            description: 'Both left and right sides',
           },
           back: {
             title: 'Back View',
-            description: 'Shows donor area'
-          }
+            description: 'Shows donor area',
+          },
         },
-        uploadButton: 'Upload Photo'
+        uploadButton: 'Upload Photo',
       },
       final: {
         title: 'Get my analysis',
@@ -603,7 +695,7 @@ export const en = {
         privacyNotice: 'By submitting this form, you agree to receive communications regarding your hair analysis. Your data is secure and will never be shared with third parties.',
         submit: 'Get My Free Analysis',
         submitting: 'Sending...'
-      }
+      },
     },
     doctor: {
       name: 'Dr. Mustafa Yakışıklı',
@@ -619,15 +711,15 @@ export const en = {
         previousDetails: 'The details of your previous transplant help us understand your hair restoration journey and determine the best approach for achieving your desired results.',
         medical: 'Your medical history is essential for ensuring a safe and successful procedure. Any allergies, conditions, or medications can impact your treatment plan and recovery.',
         photos: 'Clear photos help us provide the most accurate assessment of your situation.',
-        final: 'We\'re almost there! Please provide your contact information so we can send you a detailed analysis of your case and discuss the best treatment options for your needs. Your information is secure and will only be used to contact you regarding your hair transplant consultation.'
-      }
+        final: 'We\'re almost there! Please provide your contact information so we can send you a detailed analysis of your case and discuss the best treatment options for your needs. Your information is secure and will only be used to contact you regarding your hair transplant consultation.',
+      },
     },
     navigation: {
-      previous: "Previous",
-      next: "Next",
-      back: "Back",
-      forward: "Forward",
-      step: "STEP"
+      back: 'Back',
+      next: 'Next',
+      previous: 'Previous',
+      forward: 'Forward',
+      step: 'STEP'
     }
   }
 };

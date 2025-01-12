@@ -21,7 +21,7 @@ export function TreatmentsSection() {
     {
       id: 'hair',
       icon: Scissors,
-      image: 'https://glokalizm.com/yakisikli/img/treatments/hair.jpg',
+      image: 'https://glokalizm.com/yakisikli/img/treatments/hair-transplant.png',
       gradient: 'from-primary/10 via-primary/5 to-transparent',
       iconGradient: 'from-primary to-primary/80',
       path: '/treatments/hair-transplant'
@@ -29,7 +29,7 @@ export function TreatmentsSection() {
     {
       id: 'afro',
       icon: UserCheck,
-      image: 'https://glokalizm.com/yakisikli/img/treatments/afro.jpg',
+      image: 'https://glokalizm.com/yakisikli/img/treatments/afro-hair-transplant.png',
       gradient: 'from-primary/10 via-primary/5 to-transparent',
       iconGradient: 'from-primary to-primary/80',
       path: '/treatments/afro-hair-transplant'
@@ -37,7 +37,7 @@ export function TreatmentsSection() {
     {
       id: 'women',
       icon: UserCheck,
-      image: 'https://glokalizm.com/yakisikli/img/treatments/women.jpg',
+      image: 'https://glokalizm.com/yakisikli/img/treatments/women-hair-transplant.png',
       gradient: 'from-primary/10 via-primary/5 to-transparent',
       iconGradient: 'from-primary to-primary/80',
       path: '/treatments/women-hair-transplant'
@@ -45,7 +45,7 @@ export function TreatmentsSection() {
     {
       id: 'beard',
       icon: Scissors,
-      image: 'https://glokalizm.com/yakisikli/img/treatments/beard.jpg',
+      image: 'https://glokalizm.com/yakisikli/img/treatments/beard-transpant.png',
       gradient: 'from-primary/10 via-primary/5 to-transparent',
       iconGradient: 'from-primary to-primary/80',
       path: '/treatments/beard-transplant'
@@ -53,7 +53,7 @@ export function TreatmentsSection() {
     {
       id: 'eyebrow',
       icon: Scissors,
-      image: 'https://glokalizm.com/yakisikli/img/treatments/eyebrow.jpg',
+      image: 'https://glokalizm.com/yakisikli/img/treatments/eyebrown-transplant.png',
       gradient: 'from-primary/10 via-primary/5 to-transparent',
       iconGradient: 'from-primary to-primary/80',
       path: '/treatments/eyebrow-transplant'
@@ -121,37 +121,22 @@ export function TreatmentsSection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               {treatments.map((item) => {
                 const itemData = navData.treatments[item.id as keyof typeof navData.treatments];
+                const optionData = t.treatments.options[item.id as keyof typeof t.treatments.options];
                 return (
                   <a
                     key={item.id}
                     href={item.path}
-                    className="group relative md:block"
+                    className="group relative block"
                     onMouseEnter={() => setHoveredItem(item.id)}
                     onMouseLeave={() => setHoveredItem(null)}
                   >
                     <div className={cn(
-                      "relative overflow-hidden rounded-xl transition-all duration-500 md:block",
+                      "relative overflow-hidden rounded-xl transition-all duration-500",
                       "bg-gradient-to-br border border-border/50",
                       hoveredItem === item.id ? "scale-[1.02] shadow-lg" : "hover:scale-[1.01]"
                     )}>
-                      {/* Mobile Layout */}
-                      <div className="flex md:hidden items-center gap-4 p-4">
-                        <div className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0">
-                          <item.icon className="w-6 h-6 text-primary" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-base font-semibold text-foreground truncate">
-                            {t.treatments.options[item.id as keyof typeof t.treatments.options]?.title}
-                          </h3>
-                          <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
-                            {t.treatments.options[item.id as keyof typeof t.treatments.options]?.description}
-                          </p>
-                        </div>
-                        <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                      </div>
-
-                      {/* Desktop Layout */}
-                      <div className="hidden md:block relative aspect-[4/3] overflow-hidden">
+                      {/* Image with Gradient Overlay */}
+                      <div className="relative aspect-[4/3] overflow-hidden">
                         <div className={cn(
                           "absolute inset-0 bg-gradient-to-t z-10 transition-opacity duration-500",
                           item.gradient,
@@ -165,22 +150,18 @@ export function TreatmentsSection() {
                             hoveredItem === item.id ? "scale-110" : "scale-100"
                           )}
                         />
-                        <div className="absolute inset-x-0 bottom-0 p-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-lg font-semibold text-white">
-                              {t.treatments.options[item.id as keyof typeof t.treatments.options]?.title}
-                            </span>
-                            <ChevronRight className={cn(
-                              "w-4 h-4 text-white transition-transform",
-                              hoveredItem === item.id ? "translate-x-0" : "-translate-x-2 opacity-0"
-                            )} />
-                          </div>
-                          <p className={cn(
-                            "text-sm text-white/90 line-clamp-2 transition-opacity",
-                            hoveredItem === item.id ? "opacity-100" : "opacity-0"
-                          )}>
-                            {t.treatments.options[item.id as keyof typeof t.treatments.options]?.description}
-                          </p>
+                      </div>
+                      
+                      {/* Title Bar */}
+                      <div className="p-4 border-t border-border/50">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-base font-semibold truncate flex-1 mr-3">
+                            {optionData?.title}
+                          </h3>
+                          <ChevronRight className={cn(
+                            "w-5 h-5 text-muted-foreground transition-transform flex-shrink-0",
+                            hoveredItem === item.id ? "translate-x-1" : ""
+                          )} />
                         </div>
                       </div>
                     </div>
@@ -206,11 +187,12 @@ export function TreatmentsSection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {technologies.map((item) => {
                 const itemData = navData.technologies[item.id as keyof typeof navData.technologies];
+                const techData = t.treatments.technologies[item.id as keyof typeof t.treatments.technologies];
                 return (
                   <a
                     key={item.id}
                     href={item.path}
-                    className="group relative"
+                    className="group relative block"
                     onMouseEnter={() => setHoveredItem(item.id)}
                     onMouseLeave={() => setHoveredItem(null)}
                   >
@@ -219,53 +201,35 @@ export function TreatmentsSection() {
                       "bg-gradient-to-br border border-border/50",
                       hoveredItem === item.id ? "scale-[1.02] shadow-lg" : "hover:scale-[1.01]"
                     )}>
-                      {/* Mobile Layout */}
-                      <div className="flex md:hidden items-center gap-4 p-4">
-                        <div className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0">
-                          <item.icon className="w-6 h-6 text-primary" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-base font-semibold text-foreground truncate">
-                            {t.treatments.technologies[item.id as keyof typeof t.treatments.technologies]?.title}
-                          </h3>
-                          <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
-                            {t.treatments.technologies[item.id as keyof typeof t.treatments.technologies]?.description}
-                          </p>
-                        </div>
-                        <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                      </div>
-
-                      {/* Desktop Layout */}
-                      <div className="hidden md:block relative aspect-[4/3] overflow-hidden">
-                        <div className={cn(
-                          "absolute inset-0 bg-gradient-to-t z-10 transition-opacity duration-500",
-                          item.gradient,
-                          hoveredItem === item.id ? "opacity-30" : "opacity-60"
-                        )} />
-                        <img
-                          src={item.image}
-                          alt={itemData}
-                          className={cn(
-                            "w-full h-full object-cover transition-transform duration-1000",
-                            hoveredItem === item.id ? "scale-110" : "scale-100"
-                          )}
-                        />
-                        <div className="absolute inset-x-0 bottom-0 p-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-lg font-semibold text-white">
-                              {t.treatments.technologies[item.id as keyof typeof t.treatments.technologies]?.title}
-                            </span>
-                            <ChevronRight className={cn(
-                              "w-4 h-4 text-white transition-transform",
-                              hoveredItem === item.id ? "translate-x-0" : "-translate-x-2 opacity-0"
-                            )} />
-                          </div>
-                          <p className={cn(
-                            "text-sm text-white/90 line-clamp-2 transition-opacity",
-                            hoveredItem === item.id ? "opacity-100" : "opacity-0"
+                      <div className="p-5">
+                        {/* Icon and Title */}
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className={cn(
+                            "w-10 h-10 rounded-lg flex items-center justify-center",
+                            item.gradient,
+                            item.iconColor
                           )}>
-                            {t.treatments.technologies[item.id as keyof typeof t.treatments.technologies]?.description}
-                          </p>
+                            <item.icon className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <h3 className="text-base font-semibold">
+                              {techData?.title}
+                            </h3>
+                          </div>
+                        </div>
+                        
+                        {/* Description */}
+                        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                          {techData?.description}
+                        </p>
+                        
+                        {/* Learn More Link */}
+                        <div className="flex items-center text-sm text-primary font-medium">
+                          <span>{t.treatments.cta.learn}</span>
+                          <ChevronRight className={cn(
+                            "w-4 h-4 ml-1 transition-transform",
+                            hoveredItem === item.id ? "translate-x-1" : ""
+                          )} />
                         </div>
                       </div>
                     </div>
