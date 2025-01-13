@@ -33,20 +33,20 @@ export function WhyUsSection() {
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="text-base font-bold truncate">Dr. Mustafa Yakışıklı</h3>
-                <p className="text-sm text-muted-foreground">{t.home.whyUs.doctorTitle}</p>
+                <p className="text-sm text-muted-foreground">{t.home.hero.whyUs.doctorTitle}</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              {t.home.whyUs.doctorDescription}
+              {t.home.hero.whyUs.doctorDescription}
             </p>
             <div className="flex items-center justify-between text-sm">
               <div className="flex items-center gap-2">
                 <Award className="w-4 h-4 text-primary" />
-                <span className="font-medium">{t.home.whyUs.stats.certificates}</span>
+                <span className="font-medium">{t.home.hero.whyUs.stats.certificates}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-primary" />
-                <span className="font-medium">{t.home.whyUs.stats.operations}</span>
+                <span className="font-medium">{t.home.hero.whyUs.stats.operations}</span>
               </div>
             </div>
           </div>
@@ -66,20 +66,20 @@ export function WhyUsSection() {
             <div className="space-y-6">
               <div className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10">
                 <Medal className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-primary">{t.home.whyUs.doctorTitle}</span>
+                <span className="text-sm font-medium text-primary">{t.home.hero.whyUs.doctorTitle}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold">Dr. Mustafa Yakışıklı</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                {t.home.whyUs.doctorDescription}
+                {t.home.hero.whyUs.doctorDescription}
               </p>
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2">
                   <Award className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-medium whitespace-nowrap">{t.home.whyUs.stats.certificates}</span>
+                  <span className="text-sm font-medium whitespace-nowrap">{t.home.hero.whyUs.stats.certificates}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-medium whitespace-nowrap">{t.home.whyUs.stats.operations}</span>
+                  <span className="text-sm font-medium whitespace-nowrap">{t.home.hero.whyUs.stats.operations}</span>
                 </div>
               </div>
             </div>

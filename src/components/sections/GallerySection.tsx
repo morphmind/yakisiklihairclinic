@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
+import { LocaleContext } from '@/contexts/LocaleContext';
+import { supabase } from '@/lib/supabase';
 import { VideoModal } from '@/components/ui/video-modal';
+import { useContext } from 'react';
 import { Button } from '@/components/ui/button';
 import { Calendar, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -20,76 +23,12 @@ interface SliderState {
   isDragging: boolean;
 }
 
-const cases = [
-  {
-    id: 1,
-    type: 'hair',
-    beforeImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/2a.jpg',
-    afterImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/2b.jpg',
-    timeframe: 'month12',
-    grafts: 4500,
-    age: 32,
-    testimonial: {
-      videoId: 'QvzQlwSnzTQ',
-      name: 'John D.',
-      country: '🇬🇧 UK',
-      rating: 5,
-      text: 'Incredible results! The whole process was smooth and professional.'
-    }
-  },
-  {
-    id: 2,
-    type: 'beard',
-    beforeImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/3a.jpg',
-    afterImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/3b.jpg',
-    timeframe: 'month6',
-    grafts: 2500,
-    age: 28,
-    testimonial: {
-      videoId: 'QvzQlwSnzTQ',
-      name: 'Michael S.',
-      country: '🇩🇪 Germany',
-      rating: 5,
-      text: 'Best decision I ever made. The beard transplant looks completely natural.'
-    }
-  },
-  {
-    id: 3,
-    type: 'men',
-    beforeImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10a.jpg',
-    afterImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10b.jpg',
-    timeframe: 'month12',
-    grafts: 3000,
-    age: 45,
-    testimonial: {
-      videoId: 'QvzQlwSnzTQ',
-      name: 'Sarah M.',
-      country: '🇫🇷 France',
-      rating: 5,
-      text: 'Dr. Yakışıklı and his team were amazing. My hair looks beautiful and natural.'
-    }
-  },
-    {
-    id: 4,
-    type: 'women',
-    beforeImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10a.jpg',
-    afterImage: 'https://yakisiklihairclinic.com/wp-content/uploads/2023/04/10b.jpg',
-    timeframe: 'month12',
-    grafts: 3000,
-    age: 45,
-    testimonial: {
-      videoId: 'QvzQlwSnzTQ',
-      name: 'Sarah M.',
-      country: '🇫🇷 France',
-      rating: 5,
-      text: 'Dr. Yakışıklı and his team were amazing. My hair looks beautiful and natural.'
-    }
-  },
-  // Add more cases as needed
-];
-
 export function GallerySection() {
   const { t } = useTranslation();
+  const { currentLocale } = useContext(LocaleContext);
+  const [cases, setCases] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState('all');
   const [hoveredCase, setHoveredCase] = useState<number | null>(null);
   const [sliderPosition, setSliderPosition] = useState<Record<number, number>>({});
@@ -97,33 +36,115 @@ export function GallerySection() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const sliderRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
+  // Subscribe to realtime changes
+  useEffect(() => {
+    // Subscribe to success_stories table changes
+    const channel = supabase
+      .channel('success_stories_changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'success_stories'
+        },
+        async (payload) => {
+          console.log('Realtime change received:', payload);
+          // Refresh data when changes occur
+          await fetchStories();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  // Fetch success stories from Supabase
+  const fetchStories = async () => {
+    try {
+      setLoading(true);
+      console.log('Fetching stories...');
+      
+      const { data, error } = await supabase
+        .from('success_stories')
+        .select('*')
+        .eq('status', 'published')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+
+      if (!data) {
+        console.log('No stories found');
+        setCases([]);
+        return;
+      }
+
+      // Transform data to match component structure
+      const transformedData = data.map(story => ({
+        id: story.id,
+        type: story.type,
+        beforeImage: story.before_image,
+        afterImage: story.after_image,
+        timeframe: story.timeframe,
+        grafts: story.grafts,
+        age: story.age,
+        testimonial: {
+          videoId: story.video_id,
+          name: story.patient_name,
+          country: story.patient_country,
+          rating: story.rating,
+          text: story.testimonial
+        }
+      }));
+
+      console.log('Fetched stories:', transformedData);
+      setCases(transformedData);
+      setError(null);
+    } catch (err: any) {
+      setError(err.message);
+      console.error('Error fetching success stories:', err);
+      setCases([]); // Reset cases on error
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Initial fetch
+  React.useEffect(() => {
+    fetchStories();
+  }, [currentLocale.code]);
+
   const filters = [
     { id: 'all', icon: Sparkles },
     { id: 'hair', icon: ChevronRight },
+    { id: 'women', icon: ChevronRight },
     { id: 'beard', icon: ChevronRight },
     { id: 'eyebrow', icon: ChevronRight },
-    { id: 'women', icon: ChevronRight },
+    { id: 'afro', icon: ChevronRight },
   ];
 
   const filteredCases = activeFilter === 'all' 
     ? cases 
     : cases.filter(c => c.type === activeFilter);
 
-  // Initialize slider states for visible cases
+  // Initialize slider states for visible cases only when filteredCases changes
   useEffect(() => {
     const newPositions: Record<number, number> = {};
     const newDragging: Record<number, boolean> = {};
     
     filteredCases.forEach(item => {
-      if (typeof sliderPosition[item.id] === 'undefined') {
-        newPositions[item.id] = 50;
-        newDragging[item.id] = false;
-      }
+      newPositions[item.id] = sliderPosition[item.id] ?? 50;
+      newDragging[item.id] = isDragging[item.id] ?? false;
     });
     
-    setSliderPosition(prev => ({ ...prev, ...newPositions }));
-    setIsDragging(prev => ({ ...prev, ...newDragging }));
-  }, [activeFilter, filteredCases]);
+    setSliderPosition(newPositions);
+    setIsDragging(newDragging);
+  }, [filteredCases.map(item => item.id).join(',')]);
 
   const handleMouseDown = (e: React.MouseEvent, caseId: number) => {
     e.preventDefault(); // Prevent text selection while dragging
@@ -246,133 +267,146 @@ export function GallerySection() {
           ))}
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {filteredCases.map((item) => (
-            <div
-              key={item.id}
-              className="group relative"
-              onMouseEnter={() => setHoveredCase(item.id)}
-              onMouseLeave={() => setHoveredCase(null)}
-            >
-              <div className={cn(
-                "relative overflow-hidden rounded-xl transition-all duration-500",
-                "bg-gradient-to-br border border-border/50",
-                hoveredCase === item.id ? "scale-[1.02] shadow-lg" : "hover:scale-[1.01]"
-              )}>
-                {/* Before/After Slider */}
-                <div 
-                  ref={el => sliderRefs.current[item.id] = el}
-                  className="relative aspect-[4/3] cursor-ew-resize"
-                  onMouseDown={e => handleMouseDown(e, item.id)}
-                  onTouchStart={e => handleTouchStart(e, item.id)}
-                  onTouchMove={e => handleTouchMove(e, item.id)}
-                  onTouchEnd={() => handleMouseUp(item.id)}
-                  style={{ touchAction: 'none', overflow: 'hidden' }}
-                >
-                  {/* Before Image */}
-                  <div className="absolute inset-0">
-                    <img
-                      src={item.beforeImage}
-                      alt="Before"
-                      className="w-full h-full object-cover"
-                      draggable="false"
-                    />
-                  </div>
-
-                  {/* After Image */}
+        {loading ? (
+          <div className="flex items-center justify-center min-h-[200px]">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          </div>
+        ) : error ? (
+          <div className="text-center text-destructive">
+            <p>{error}</p>
+          </div>
+        ) : cases.length === 0 ? (
+          <div className="text-center text-muted-foreground">
+            <p>Henüz başarı hikayesi eklenmemiş.</p>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {filteredCases.map((item) => (
+              <div
+                key={item.id}
+                className="group relative"
+                onMouseEnter={() => setHoveredCase(item.id)}
+                onMouseLeave={() => setHoveredCase(null)}
+              >
+                <div className={cn(
+                  "relative overflow-hidden rounded-xl transition-all duration-500",
+                  "bg-gradient-to-br border border-border/50",
+                  hoveredCase === item.id ? "scale-[1.02] shadow-lg" : "hover:scale-[1.01]"
+                )}>
+                  {/* Before/After Slider */}
                   <div 
-                    className="absolute inset-0 overflow-hidden transition-all duration-75"
-                    style={{ clipPath: `inset(0 ${100 - (sliderPosition[item.id] ?? 50)}% 0 0)` }}
+                    ref={el => sliderRefs.current[item.id] = el}
+                    className="relative aspect-[4/3] cursor-ew-resize"
+                    onMouseDown={e => handleMouseDown(e, item.id)}
+                    onTouchStart={e => handleTouchStart(e, item.id)}
+                    onTouchMove={e => handleTouchMove(e, item.id)}
+                    onTouchEnd={() => handleMouseUp(item.id)}
+                    style={{ touchAction: 'none', overflow: 'hidden' }}
                   >
-                    <img
-                      src={item.afterImage}
-                      alt="After"
-                      className="absolute inset-0 w-full h-full object-cover"
-                      draggable="false" 
-                    />
-                  </div>
+                    {/* Before Image */}
+                    <div className="absolute inset-0">
+                      <img
+                        src={item.beforeImage}
+                        alt="Before"
+                        className="w-full h-full object-cover"
+                        draggable="false"
+                      />
+                    </div>
 
-                  {/* Slider Handle */}
-                  <div 
-                    className="absolute top-0 bottom-0 w-0.5 bg-white cursor-ew-resize z-10 transition-all duration-75 shadow-[0_0_10px_rgba(0,0,0,0.3)]"
-                    style={{ left: `${sliderPosition[item.id] ?? 50}%` }}
-                  >
-                    <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center">
-                      <div className="flex gap-0.5">
-                        <ArrowLeft className="w-3 h-3 text-primary" />
-                        <ArrowRight className="w-3 h-3 text-primary" />
+                    {/* After Image */}
+                    <div 
+                      className="absolute inset-0 overflow-hidden transition-all duration-75"
+                      style={{ clipPath: `inset(0 ${100 - (sliderPosition[item.id] ?? 50)}% 0 0)` }}
+                    >
+                      <img
+                        src={item.afterImage}
+                        alt="After"
+                        className="absolute inset-0 w-full h-full object-cover"
+                        draggable="false" 
+                      />
+                    </div>
+
+                    {/* Slider Handle */}
+                    <div 
+                      className="absolute top-0 bottom-0 w-0.5 bg-white cursor-ew-resize z-10 transition-all duration-75 shadow-[0_0_10px_rgba(0,0,0,0.3)]"
+                      style={{ left: `${sliderPosition[item.id] ?? 50}%` }}
+                    >
+                      <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center">
+                        <div className="flex gap-0.5">
+                          <ArrowLeft className="w-3 h-3 text-primary" />
+                          <ArrowRight className="w-3 h-3 text-primary" />
+                        </div>
+                        <div className="absolute inset-0 border-2 border-white/50 rounded-full animate-pulse" />
                       </div>
-                      <div className="absolute inset-0 border-2 border-white/50 rounded-full animate-pulse" />
+                    </div>
+
+                    {/* Labels */}
+                    <div className="absolute top-4 left-4 z-10">
+                      <div className="px-3 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm text-sm font-medium text-white border border-white/20 shadow-lg">
+                        {t.treatments.gallery.labels.before}
+                      </div>
+                    </div>
+                    <div className="absolute top-4 right-4 z-10">
+                      <div className="px-3 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm text-sm font-medium text-white border border-white/20 shadow-lg">
+                        {t.treatments.gallery.labels.after}
+                      </div>
+                    </div>
+
+                    {/* Info Overlay */}
+                    <div className={cn(
+                      "absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 via-black/50 to-transparent",
+                      "transition-opacity duration-300",
+                      hoveredCase === item.id ? "opacity-100" : "opacity-0"
+                    )}>
+                      <div className="flex items-center justify-between text-white">
+                        <div>
+                          <div className="text-sm font-medium mb-1">
+                            {t.treatments.gallery.timeframes[item.timeframe as keyof typeof t.treatments.gallery.timeframes]}
+                          </div>
+                          <div className="text-xs text-white/80">
+                            {item.grafts} Grafts • Age {item.age}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          {Array.from({ length: item.testimonial.rating }).map((_, i) => (
+                            <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Labels */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <div className="px-3 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm text-sm font-medium text-white border border-white/20 shadow-lg">
-                      {t.treatments.gallery.labels.before}
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-4 z-10">
-                    <div className="px-3 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm text-sm font-medium text-white border border-white/20 shadow-lg">
-                      {t.treatments.gallery.labels.after}
-                    </div>
-                  </div>
-
-                  {/* Info Overlay */}
-                  <div className={cn(
-                    "absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 via-black/50 to-transparent",
-                    "transition-opacity duration-300",
-                    hoveredCase === item.id ? "opacity-100" : "opacity-0"
-                  )}>
-                    <div className="flex items-center justify-between text-white">
+                  {/* Testimonial */}
+                  <div className="p-4 border-t border-border/50">
+                    <div className="flex items-start gap-3">
+                      <Quote className="w-8 h-8 text-primary/20" />
                       <div>
-                        <div className="text-sm font-medium mb-1">
-                          {t.treatments.gallery.timeframes[item.timeframe as keyof typeof t.treatments.gallery.timeframes]}
+                        <p className="text-sm text-muted-foreground italic mb-2">
+                          "{item.testimonial.text}"
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">{item.testimonial.name}</span>
+                            <span className="text-sm text-muted-foreground">{item.testimonial.country}</span>
+                          </div>
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-8 gap-2"
+                            onClick={() => setActiveVideo(item.testimonial.videoId)}
+                          >
+                            <Play className="w-3.5 h-3.5" />
+                            <span className="text-xs">{t.treatments.gallery.labels.watchStory}</span>
+                          </Button>
                         </div>
-                        <div className="text-xs text-white/80">
-                          {item.grafts} Grafts • Age {item.age}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        {Array.from({ length: item.testimonial.rating }).map((_, i) => (
-                          <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Testimonial */}
-                <div className="p-4 border-t border-border/50">
-                  <div className="flex items-start gap-3">
-                    <Quote className="w-8 h-8 text-primary/20" />
-                    <div>
-                      <p className="text-sm text-muted-foreground italic mb-2">
-                        "{item.testimonial.text}"
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">{item.testimonial.name}</span>
-                          <span className="text-sm text-muted-foreground">{item.testimonial.country}</span>
-                        </div>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          className="h-8 gap-2"
-                          onClick={() => setActiveVideo(item.testimonial.videoId)}
-                        >
-                          <Play className="w-3.5 h-3.5" />
-                          <span className="text-xs">{t.treatments.gallery.labels.watchStory}</span>
-                        </Button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
           <Button

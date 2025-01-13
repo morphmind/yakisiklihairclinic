@@ -17,8 +17,14 @@ export const en = {
         awards: 'Awards & Certificates'
       },
       whyUs: {
+        doctorTitle: 'Hair Transplant Surgeon',
+        doctorDescription: 'With over 12 years of experience as a pioneer in hair transplantation, Dr. Mustafa Yakışıklı achieves natural and permanent results using the latest technologies and innovative techniques.',
         title: 'Why Choose Us?',
         description: 'Experience excellence in hair transplantation with our unique advantages',
+        stats: {
+          certificates: '25+ International Certificates',
+          operations: '15,000+ Successful Operations'
+        },
         features: {
           expertise: {
             title: 'Expert Medical Team',
@@ -81,14 +87,6 @@ export const en = {
           },
           cta: 'Get Free Hair Analysis'
         }
-      }
-    },
-    whyUs: {
-      doctorTitle: 'Hair Transplant Surgeon',
-      doctorDescription: 'With over 12 years of experience as a pioneer in hair transplantation, Dr. Mustafa Yakışıklı achieves natural and permanent results using the latest technologies and innovative techniques.',
-      stats: {
-        certificates: '25+ International Certificates',
-        operations: '15,000+ Successful Operations'
       }
     },
     experience: {
@@ -170,97 +168,6 @@ export const en = {
           whatsapp: 'Chat on WhatsApp',
           schedule: 'Schedule Consultation',
           call: 'Call Now'
-        }
-      }
-    },
-    home: {
-      hero: {
-        title: {
-          highlight: 'Premium Hair Transplant',
-          main: 'in Turkey with Expert Care'
-        },
-        description: 'Experience world-class hair restoration with Dr. Mustafa Yakışıklı. Advanced techniques, natural results, and personalized care in the heart of Turkey.',
-        cta: {
-          analysis: 'Get Free Hair Analysis',
-          whatsapp: 'WhatsApp Consultation'
-        },
-        stats: {
-          operations: 'Successful Operations',
-          growth: 'Hair Growth Rate',
-          experience: 'Years Experience',
-          awards: 'Awards & Certificates'
-        }
-      },
-      whyUs: {
-        doctorTitle: 'Hair Transplant Surgeon',
-        doctorDescription: 'With over 12 years of experience as a pioneer in hair transplantation, Dr. Mustafa Yakışıklı achieves natural and permanent results using the latest technologies and innovative techniques.',
-        stats: {
-          certificates: '25+ International Certificates',
-          operations: '15,000+ Successful Operations'
-        },
-        title: 'Why Choose Us?',
-        description: 'Experience excellence in hair transplantation with our unique advantages',
-        features: {
-          expertise: {
-            title: 'Expert Medical Team',
-            description: 'Led by Dr. Mustafa Yakışıklı, our team combines years of experience with cutting-edge techniques'
-          },
-          technology: {
-            title: 'Advanced Technology',
-            description: 'State-of-the-art facilities and the latest hair transplant technologies for optimal results'
-          },
-          natural: {
-            title: 'Natural Results',
-            description: 'Achieve natural-looking results with our precise and artistic approach to hair restoration'
-          },
-          personalized: {
-            title: 'Personalized Care',
-            description: 'Customized treatment plans tailored to your unique needs and hair restoration goals'
-          },
-          aftercare: {
-            title: 'Lifetime Aftercare',
-            description: 'Comprehensive post-procedure support and long-term care for lasting results'
-          },
-          satisfaction: {
-            title: 'Patient Satisfaction',
-            description: 'Thousands of satisfied patients from around the world trust our expertise'
-          }
-        },
-        clinic: {
-          title: 'Our Clinic Features',
-          features: [
-            'State-of-the-art equipment and sterile operating room environment',
-            'Experienced medical team and special patient care service',
-            'International service quality standards',
-            '24/7 patient support and follow-up system'
-          ]
-        },
-        certifications: {
-          title: 'Certifications & Accreditations',
-          items: {
-            jci: 'JCI Accreditation',
-            iso: 'ISO 9001:2015',
-            ishrs: 'ISHRS Membership',
-            tshd: 'TSHD Membership'
-          }
-        },
-        satisfaction: {
-          title: 'Patient Satisfaction',
-          stats: {
-            rate: {
-              value: '98%',
-              label: 'Patient Satisfaction Rate'
-            },
-            patients: {
-              value: '15K+',
-              label: 'Happy Patients'
-            },
-            rating: {
-              value: '4.9/5',
-              label: 'Patient Rating'
-            }
-          },
-          cta: 'Get Free Hair Analysis'
         }
       }
     }

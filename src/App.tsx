@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminLogin from './pages/admin/login';
+import AdminDashboard from './pages/admin/dashboard';
 import Header from './components/layout/Header';
 import HairAnalysis from './pages/hair-analysis';
 import { LocaleProvider } from './contexts/LocaleContext';
@@ -38,6 +40,8 @@ function App() {
         <div className="min-h-screen">
           <Routes>
             <Route path="/hair-analysis" element={<HairAnalysis />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/" element={
               <div className="min-h-screen bg-background">
                 <Header
