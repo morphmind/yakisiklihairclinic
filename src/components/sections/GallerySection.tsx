@@ -35,6 +35,8 @@ export function GallerySection() {
   const [isDragging, setIsDragging] = useState<Record<number, boolean>>({});
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const sliderRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
 
   // Subscribe to realtime changes
   useEffect(() => {
@@ -46,12 +48,28 @@ export function GallerySection() {
         {
           event: '*',
           schema: 'public',
-          table: 'success_stories'
+          table: 'success_stories',
+          filter: 'status=eq.published'
         },
-        async (payload) => {
+        (payload) => {
           console.log('Realtime change received:', payload);
-          // Refresh data when changes occur
-          await fetchStories();
+          // Handle different types of changes
+          switch (payload.eventType) {
+            case 'INSERT':
+              setCases(prev => [payload.new, ...prev]);
+              break;
+            case 'UPDATE':
+              setCases(prev => prev.map(story => 
+                story.id === payload.new.id ? payload.new : story
+              ));
+              break;
+            case 'DELETE':
+              setCases(prev => prev.filter(story => story.id !== payload.old.id));
+              break;
+            default:
+              // Fallback to full refresh if needed
+              fetchStories();
+          }
         }
       )
       .subscribe();
@@ -64,13 +82,16 @@ export function GallerySection() {
   // Fetch success stories from Supabase
   const fetchStories = async () => {
     try {
+      if (!supabase) {
+        console.error('Supabase client not initialized');
+        return;
+      }
       setLoading(true);
-      console.log('Fetching stories...');
       
       const { data, error } = await supabase
         .from('success_stories')
         .select('*')
-        .eq('status', 'published')
+        .eq('status', 'published') 
         .order('created_at', { ascending: false });
 
       if (error) {
@@ -79,7 +100,7 @@ export function GallerySection() {
       }
 
       if (!data) {
-        console.log('No stories found');
+        console.log('No data returned from Supabase');
         setCases([]);
         return;
       }
@@ -102,12 +123,11 @@ export function GallerySection() {
         }
       }));
 
-      console.log('Fetched stories:', transformedData);
       setCases(transformedData);
       setError(null);
     } catch (err: any) {
+      console.error('Error fetching stories:', err);
       setError(err.message);
-      console.error('Error fetching success stories:', err);
       setCases([]); // Reset cases on error
     } finally {
       setLoading(false);
@@ -122,15 +142,27 @@ export function GallerySection() {
   const filters = [
     { id: 'all', icon: Sparkles },
     { id: 'hair', icon: ChevronRight },
+    { id: 'afro', icon: ChevronRight },
     { id: 'women', icon: ChevronRight },
     { id: 'beard', icon: ChevronRight },
     { id: 'eyebrow', icon: ChevronRight },
-    { id: 'afro', icon: ChevronRight },
   ];
 
   const filteredCases = activeFilter === 'all' 
     ? cases 
     : cases.filter(c => c.type === activeFilter);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredCases.length / itemsPerPage);
+  const paginatedCases = filteredCases.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Reset to first page when filter changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeFilter]);
 
   // Initialize slider states for visible cases only when filteredCases changes
   useEffect(() => {
@@ -239,9 +271,9 @@ export function GallerySection() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 mb-3">
-            <Star className="w-3.5 h-3.5 text-primary" />
-            <span className="text-xs font-medium text-primary">{t.treatments.gallery.title}</span>
+          <div className="badge-stories mb-3 text-purple-500 dark:text-purple-400">
+            <Star className="badge-icon text-purple-500" />
+            <span className="badge-text text-purple-500">{t.treatments.gallery.title}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">{t.treatments.gallery.title}</h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -281,7 +313,7 @@ export function GallerySection() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {filteredCases.map((item) => (
+            {paginatedCases.map((item) => (
               <div
                 key={item.id}
                 className="group relative"
@@ -405,6 +437,46 @@ export function GallerySection() {
                 </div>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 mb-8">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+            
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <Button
+                  key={page}
+                  variant={currentPage === page ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCurrentPage(page)}
+                  className={cn(
+                    "w-8 h-8",
+                    currentPage === page && "bg-primary text-primary-foreground"
+                  )}
+                >
+                  {page}
+                </Button>
+              ))}
+            </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              <ArrowRight className="w-4 h-4" />
+            </Button>
           </div>
         )}
 

@@ -125,9 +125,9 @@ export function PriceCalculator() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span className="text-xs font-medium text-primary">{t.pricing.badge}</span>
+          <div className="badge-pricing mb-3 text-amber-500 dark:text-amber-400">
+            <Sparkles className="badge-icon text-amber-500" />
+            <span className="badge-text text-amber-500">{t.pricing.badge}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">{t.pricing.title}</h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -296,9 +296,9 @@ export function PriceCalculator() {
             <div className="absolute inset-0 bg-grid-white/5" />
             <div className="relative p-8 sm:p-12">
               <div className="max-w-3xl mx-auto text-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm mb-6">
-                  <Shield className="w-3.5 h-3.5 text-primary" />
-                  <span className="text-xs font-medium text-primary">{t.pricing.guide.description}</span>
+                <div className="badge-helpchoose mb-6">
+                  <Shield className="badge-icon" />
+                  <span className="badge-text">{t.pricing.guide.description}</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold mb-4">
                   {t.pricing.guide.title}

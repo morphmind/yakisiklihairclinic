@@ -1,6 +1,7 @@
 export const tr = {
   home: {
     hero: {
+      badge: 'Premium Saç Ekimi Merkezi',
       title: {
         highlight: 'Premium Saç Ekimi',
         main: 'Türkiye\'de Uzman Bakımı'
@@ -213,6 +214,7 @@ export const tr = {
       filters: {
         all: 'Tüm Vakalar',
         hair: 'Saç Ekimi',
+        afro: 'Afro Saç Ekimi',
         beard: 'Sakal Ekimi',
         eyebrow: 'Kaş Ekimi',
         women: 'Kadın Vakaları'
@@ -632,10 +634,11 @@ export const tr = {
           secure: 'SSL veri transferi',
           expert: 'Uzman analizi'
         },
-        privacyNotice: 'Bu formu göndererek, saç analizinizle ilgili iletişim kurmayı kabul ediyorsunuz. Verileriniz güvende ve asla üçüncü taraflarla paylaşılmayacak.',
+        privacyNotice:
+          'Bu formu göndererek, saç analizinizle ilgili iletişim kurmayı kabul ediyorsunuz. Verileriniz güvende ve asla üçüncü taraflarla paylaşılmayacak.',
         submit: 'Ücretsiz Analizi Al',
         submitting: 'Gönderiliyor...'
-      }
+      },
     },
     doctor: {
       name: 'Dr. Mustafa Yakışıklı',
@@ -643,10 +646,10 @@ export const tr = {
       status: 'Çevrimiçi',
       consultButton: 'WhatsApp\'tan Danışın',
       messages: {
-        personal: 'Hoş geldiniz! Cinsiyetinizi anlamak, kişiselleştirilmiş bir tedavi planı oluşturmamıza yardımcı olur. Saç dökülme şekilleri ve tedavi yaklaşımları kadınlar ve erkekler arasında önemli farklılıklar gösterebilir, bu da hem prosedür tekniğini hem de beklenen sonuçları etkiler.',
-        ageRange: 'Yaşınız, en etkili saç restorasyonu yaklaşımını belirlemede çok önemli bir rol oynar. Saç dökülme şekilleri ve hormonal faktörler farklı yaş gruplarında önemli ölçüde değişiklik gösterir. Genç hastalar için restorasyon ile birlikte koruma ve önleme üzerine odaklanırken, olgun hastalar için daha kapsamlı çözümler uygulayabiliriz. Bu bilgi, sadece mevcut endişelerinizi değil, aynı zamanda gelecekteki ihtiyaçlarınızı da öngören ve bunlara hazırlanan bir tedavi planı tasarlamamıza yardımcı olur.',
-        hairLoss: 'Saç dökülme modelinizi anlamanıza yardımcı olayım. Her aşama benzersiz bir yaklaşım gerektirir ve sizin özel modelinizi belirleyerek, en iyi sonuçları elde edebileceğiniz kişiselleştirilmiş bir tedavi planı geliştirebiliriz. Ne kadar erken müdahale edersek, restorasyon için o kadar çok seçeneğimiz olur.',
-        duration: 'Saç dökülmesi sürenizi anlamak tedavi planınız için çok önemlidir. Süre, saç dökülmenizin ilerleme hızını ve stabilitesini değerlendirmemize yardımcı olur ve bu doğrudan uygulayacağımız yaklaşımı etkiler. Yeni başlayan vakalarda hem koruma hem de restorasyon üzerine odaklanabilirken, uzun süreli vakalar genellikle daha kapsamlı çözümler gerektirir.',
+        personal: 'Hoş geldiniz! Cinsiyetinizi anlamak, kişiselleştirilmiş bir tedavi planı oluşturmamıza yardımcı olur. Saç dökülme şekilleri ve tedavi yaklaşımları kadınlar ve erkekler arasında önemli farklılıklar gösterebilir.',
+        ageRange: 'Yaşınız, en etkili saç restorasyonu yaklaşımını belirlemede çok önemli bir rol oynar. Saç dökülme şekilleri ve hormonal faktörler farklı yaş gruplarında önemli ölçüde değişiklik gösterir.',
+        hairLoss: 'Saç dökülme modelinizi anlamanıza yardımcı olayım. Her aşama benzersiz bir yaklaşım gerektirir ve sizin özel modelinizi belirleyerek, en iyi sonuçları elde edebileceğiniz kişiselleştirilmiş bir tedavi planı geliştirebiliriz.',
+        duration: 'Saç dökülmesi sürenizi anlamak tedavi planınız için çok önemlidir. Süre, saç dökülmenizin ilerleme hızını ve stabilitesini değerlendirmemize yardımcı olur.',
         previous: 'Kalıtsal saç dökülmesi (androgenetik alopesi) genellikle saç dökülmesinin nedenidir',
         previousDetails: 'Önceki saç ekimi detaylarınız, saç restorasyon yolculuğunuzu anlamamıza ve istediğiniz sonuçları elde etmek için en iyi yaklaşımı belirlememize yardımcı olur.',
         medical: 'Tıbbi geçmişiniz, güvenli ve başarılı bir prosedür sağlamak için çok önemlidir. Herhangi bir alerji, durum veya ilaç tedavi planınızı ve iyileşmenizi etkileyebilir.',

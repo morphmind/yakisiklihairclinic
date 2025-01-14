@@ -103,9 +103,9 @@ export function PatientExperienceSection() {
           {/* Treatment Process */}
           <div className="space-y-8">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 mb-3">
-                <Clock className="w-3.5 h-3.5 text-primary" />
-                <span className="text-xs font-medium text-primary">{t.home.experience.process.badge}</span>
+              <div className="badge-process mb-3 text-rose-500 dark:text-rose-400">
+                <Clock className="badge-icon text-rose-500" />
+                <span className="badge-text text-rose-500">{t.home.experience.process.badge}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">{t.home.experience.process.title}</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
@@ -193,10 +193,10 @@ export function PatientExperienceSection() {
                           {stepData.description}
                         </p>
                       </div>
-                    </div>
 
-                    {/* Hover Effect Line */}
-                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                      {/* Hover Effect Line */}
+                      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                    </div>
                   </div>
                 </div>
               )})}
@@ -206,9 +206,9 @@ export function PatientExperienceSection() {
           {/* Services */}
           <div className="space-y-8">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-secondary" />
-                <span className="text-xs font-medium text-secondary">{t.home.experience.services.badge}</span>
+              <div className="badge-services mb-3 text-primary dark:text-primary-foreground">
+                <Sparkles className="badge-icon text-primary" />
+                <span className="badge-text text-primary">{t.home.experience.services.badge}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">{t.home.experience.services.title}</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">

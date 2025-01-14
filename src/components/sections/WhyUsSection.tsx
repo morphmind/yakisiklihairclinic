@@ -64,9 +64,9 @@ export function WhyUsSection() {
               />
             </div>
             <div className="space-y-6">
-              <div className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10">
-                <Medal className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-primary">{t.home.hero.whyUs.doctorTitle}</span>
+              <div className="badge-surgeon">
+                <Medal className="badge-icon text-secondary" />
+                <span className="badge-text text-secondary">{t.home.hero.whyUs.doctorTitle}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold">Dr. Mustafa Yakışıklı</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
@@ -168,9 +168,9 @@ export function WhyUsSection() {
         <div className="max-w-3xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 mb-4">
-              <HeartHandshake className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">{t.home.hero.whyUs.satisfaction.title}</span>
+            <div className="badge-satisfaction mb-4">
+              <HeartHandshake className="badge-icon text-green-500" />
+              <span className="badge-text text-green-500">{t.home.hero.whyUs.satisfaction.title}</span>
             </div>
           </div>
 

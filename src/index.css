@@ -1,7 +1,13 @@
+/* =========================
+   1) Tailwind Temel Katmanlar
+   ========================= */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* =========================
+   2) Base Layer
+   ========================= */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -25,7 +31,7 @@
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.75rem;
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -47,13 +53,11 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
   }
-}
 
-:root {
-  color-scheme: light dark;
-}
+  :root {
+    color-scheme: light dark;
+  }
 
-@layer base {
   html {
     @apply scroll-smooth;
   }
@@ -63,23 +67,31 @@
   }
 }
 
+/* =========================
+   3) Components Layer
+   ========================= */
 @layer components {
+  /* Gradient text class */
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary to-secondary;
   }
 
+  /* Noise overlay pattern */
   .noise-pattern {
     @apply after:absolute after:inset-0 after:bg-noise after:opacity-20 after:mix-blend-soft-light;
   }
 
+  /* Glass effect with backdrop blur */
   .glass-effect {
     @apply bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60;
   }
 
+  /* Example: shadow glow */
   .shadow-glow {
     box-shadow: 0 0 15px theme('colors.primary.DEFAULT');
   }
 
+  /* Media queries can be placed here or used with Tailwind prefixes (md:...) */
   @media (min-width: 768px) {
     .md\:text-4xl {
       font-size: 2.25rem;
@@ -91,12 +103,11 @@
     }
   }
 
-  /* Aspect ratio utilities */
+  /* Aspect ratio sample class */
   .aspect-w-1 {
     position: relative;
     padding-bottom: 100%;
   }
-  
   .aspect-w-1 > * {
     position: absolute;
     height: 100%;
@@ -105,5 +116,134 @@
     right: 0;
     bottom: 0;
     left: 0;
+  }
+
+  /* ------------------------
+     Badge Classes
+     ------------------------ */
+
+  .badge-premium {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full;
+    @apply bg-gradient-to-r from-primary/15 via-primary/10 to-transparent;
+    @apply dark:bg-gradient-to-r dark:from-primary/30 dark:via-primary/25 dark:to-transparent;
+    @apply border border-primary/30 dark:border-primary/40;
+    @apply shadow-[0_2px_8px_rgba(0,0,0,0.05)] dark:shadow-[0_0_20px_rgba(var(--primary),0.15)];
+    @apply backdrop-blur-[2px];
+    @apply transition-all duration-300 hover:scale-[1.02];
+    @apply text-primary dark:text-white font-medium;
+    @apply dark:hover:border-primary/60 dark:hover:bg-primary/20;
+  }
+
+  .badge-premium .badge-text {
+    @apply text-primary dark:text-primary-foreground text-xs font-medium tracking-wide;
+  }
+
+  .badge-surgeon {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full;
+    @apply bg-gradient-to-r from-secondary/10 via-secondary/5 to-transparent border border-secondary/20;
+    @apply dark:from-secondary/20 dark:via-secondary/10 dark:to-secondary/5 dark:border-secondary/30;
+    @apply dark:bg-gradient-to-r dark:from-secondary/20 dark:via-secondary/15 dark:to-secondary/10;
+    @apply dark:shadow-[0_0_15px_rgba(var(--secondary),0.1)];
+  }
+
+  .badge-satisfaction {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full;
+    @apply bg-gradient-to-r from-green-500/10 via-green-500/5 to-transparent border border-green-500/20;
+    @apply dark:from-green-500/20 dark:via-green-500/10 dark:to-green-500/5 dark:border-green-500/30;
+    @apply dark:bg-gradient-to-r dark:from-green-500/20 dark:via-green-500/15 dark:to-green-500/10;
+    @apply dark:shadow-[0_0_15px_rgba(34,197,94,0.1)];
+  }
+
+  .badge-treatments {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full;
+    @apply bg-gradient-to-r from-blue-500/10 via-blue-500/5 to-transparent border border-blue-500/20;
+    @apply dark:from-blue-500/20 dark:via-blue-500/10 dark:to-blue-500/5 dark:border-blue-500/30;
+    @apply dark:bg-gradient-to-r dark:from-blue-500/20 dark:via-blue-500/15 dark:to-blue-500/10;
+    @apply dark:shadow-[0_0_15px_rgba(59,130,246,0.1)];
+  }
+
+  .badge-stories {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full;
+    @apply bg-gradient-to-r from-purple-500/10 via-purple-500/5 to-transparent border border-purple-500/20;
+    @apply dark:from-purple-500/20 dark:via-purple-500/10 dark:to-purple-500/5 dark:border-purple-500/30;
+    @apply dark:bg-gradient-to-r dark:from-purple-500/20 dark:via-purple-500/15 dark:to-purple-500/10;
+    @apply dark:shadow-[0_0_15px_rgba(168,85,247,0.1)];
+  }
+
+  .badge-pricing {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full;
+    @apply bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-500/20;
+    @apply dark:from-amber-500/20 dark:via-amber-500/10 dark:to-amber-500/5 dark:border-amber-500/30;
+    @apply dark:bg-gradient-to-r dark:from-amber-500/20 dark:via-amber-500/15 dark:to-amber-500/10;
+    @apply dark:shadow-[0_0_15px_rgba(245,158,11,0.1)];
+  }
+
+  .badge-process {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full;
+    @apply bg-gradient-to-r from-rose-500/20 via-rose-500/10 to-transparent border border-rose-500/30;
+    @apply dark:from-rose-500/30 dark:via-rose-500/20 dark:to-rose-500/10 dark:border-rose-500/40;
+    @apply dark:bg-gradient-to-r dark:from-rose-500/20 dark:via-rose-500/15 dark:to-rose-500/10;
+    @apply dark:shadow-[0_0_20px_rgba(244,63,94,0.15)];
+    @apply text-rose-500 dark:text-rose-400;
+  }
+
+  .badge-services {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full;
+    @apply bg-gradient-to-r from-secondary/15 via-secondary/10 to-transparent;
+    @apply dark:bg-gradient-to-r dark:from-secondary/30 dark:via-secondary/25 dark:to-transparent;
+    @apply border border-secondary/30 dark:border-secondary/40;
+    @apply shadow-[0_2px_8px_rgba(0,0,0,0.05)] dark:shadow-[0_0_20px_rgba(var(--secondary),0.15)];
+    @apply backdrop-blur-[2px];
+    @apply transition-all duration-300 hover:scale-[1.02];
+    @apply text-secondary dark:text-secondary-foreground font-medium;
+    @apply dark:hover:border-secondary/60 dark:hover:bg-secondary/20;
+  }
+
+  .badge-hero {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full;
+    @apply bg-gradient-to-r from-primary/10 via-primary/5 to-transparent;
+    @apply dark:bg-gradient-to-r dark:from-primary/25 dark:via-primary/15 dark:to-transparent;
+    @apply border border-primary/20 dark:border-primary/30;
+    @apply shadow-[0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_0_25px_rgba(var(--primary),0.15)];
+    @apply backdrop-blur-[2px];
+    @apply transition-all duration-500;
+    @apply animate-pulse;
+    @apply relative overflow-hidden;
+    @apply before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent;
+    @apply before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-1000;
+    @apply text-primary dark:text-white font-medium;
+    @apply dark:hover:border-primary/50 dark:hover:bg-primary/20;
+  }
+
+  .badge-hero .badge-dot {
+    @apply w-2 h-2 rounded-full bg-primary dark:bg-white;
+    @apply animate-pulse;
+  }
+
+  .badge-icon {
+    @apply w-4 h-4;
+    @apply text-inherit dark:text-inherit;
+  }
+
+  .badge-text {
+    @apply text-sm font-medium tracking-wide;
+    @apply text-inherit dark:text-inherit;
+  }
+
+  .badge-helpchoose {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full;
+    @apply bg-gradient-to-r from-indigo-500/10 via-indigo-500/5 to-transparent border border-indigo-500/20;
+    @apply dark:from-indigo-500/20 dark:via-indigo-500/10 dark:to-indigo-500/5 dark:border-indigo-500/30;
+    @apply dark:bg-gradient-to-r dark:from-indigo-500/20 dark:via-indigo-500/15 dark:to-indigo-500/10;
+    @apply dark:shadow-[0_0_15px_rgba(99,102,241,0.15)];
+    @apply text-indigo-500 dark:text-indigo-400;
+  }
+
+  .badge-helpchoose .badge-icon {
+    @apply text-indigo-500 dark:text-indigo-400;
+  }
+
+  .badge-helpchoose .badge-text {
+    @apply text-indigo-500 dark:text-indigo-400;
   }
 }

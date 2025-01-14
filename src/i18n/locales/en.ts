@@ -1,6 +1,7 @@
 export const en = {
   home: {
     hero: {
+      badge: 'Premium Hair Transplant Center',
       title: {
         highlight: 'Premium Hair Transplant',
         main: 'in Turkey with Expert Care'
@@ -181,6 +182,7 @@ export const en = {
       filters: {
         all: 'All Cases',
         hair: 'Hair Transplant',
+        afro: 'Afro Hair Transplant',
         beard: 'Beard Transplant',
         eyebrow: 'Eyebrow Transplant',
         women: 'Women Cases'

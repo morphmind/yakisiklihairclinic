@@ -108,9 +108,9 @@ export function TreatmentsSection() {
           {/* Treatments Section */}
           <div className="space-y-8">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 mb-3">
-                <CircleDot className="w-3.5 h-3.5 text-primary" />
-                <span className="text-xs font-medium text-primary">{navData.treatments.title}</span>
+              <div className="badge-treatments mb-3 text-blue-500 dark:text-blue-400">
+                <CircleDot className="badge-icon text-blue-500" />
+                <span className="badge-text text-blue-500">{navData.treatments.title}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">{navData.treatments.title}</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
@@ -174,9 +174,9 @@ export function TreatmentsSection() {
           {/* Technologies Section */}
           <div className="space-y-8">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/5 border border-secondary/10 mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-secondary" />
-                <span className="text-xs font-medium text-secondary">{navData.technologies.title}</span>
+              <div className="badge-premium mb-3 text-primary dark:text-primary-foreground">
+                <Sparkles className="badge-icon text-primary" />
+                <span className="badge-text text-primary">{navData.technologies.title}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">{navData.technologies.title}</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">

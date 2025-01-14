@@ -1,45 +1,44 @@
-import React from 'react';
-import { Award, Calendar, CheckCircle, Sprout, Play, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
-import { cn } from '@/lib/utils';
-import { useTranslation } from '@/hooks/useTranslation';
-import { useState } from 'react';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Award, Calendar, CheckCircle, Sprout, Play, ChevronRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { useTranslation } from '@/hooks/useTranslation'
 
 export function HeroSection() {
-  const { t } = useTranslation();
-  const [hoveredStat, setHoveredStat] = useState<number | null>(null);
-  
+  const { t } = useTranslation()
+  const [hoveredStat, setHoveredStat] = useState<number | null>(null)
+
   const stats = [
-    { 
+    {
       label: t.home.hero.stats.operations,
       value: '15K+',
       icon: CheckCircle,
       gradient: 'from-green-500/10 to-emerald-500/10',
-      iconColor: 'text-emerald-500'
+      iconColor: 'text-emerald-500',
     },
-    { 
+    {
       label: t.home.hero.stats.growth,
       value: '99%',
       icon: Sprout,
       gradient: 'from-blue-500/10 to-indigo-500/10',
-      iconColor: 'text-blue-500'
+      iconColor: 'text-blue-500',
     },
-    { 
+    {
       label: t.home.hero.stats.experience,
       value: '12+',
       icon: Calendar,
       gradient: 'from-purple-500/10 to-pink-500/10',
-      iconColor: 'text-purple-500'
+      iconColor: 'text-purple-500',
     },
     {
       label: t.home.hero.stats.awards,
       value: '25+',
       icon: Award,
       gradient: 'from-amber-500/10 to-orange-500/10',
-      iconColor: 'text-amber-500'
+      iconColor: 'text-amber-500',
     },
-  ];
+  ]
 
   return (
     <div className="relative min-h-[85vh] lg:min-h-[90vh] flex items-center pt-16 md:pt-12 overflow-hidden">
@@ -53,16 +52,12 @@ export function HeroSection() {
           <div className="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
             {/* Left Content */}
             <div className="lg:col-span-4">
-              <div className="relative mb-4">
-                <div className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20">
-                  <span className="flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                  </span>
-                  <p className="text-sm font-medium text-primary dark:text-primary-foreground">
-                    {t.home.hero.badge || 'Premium Hair Transplant Center'}
-                  </p>
-                </div>
+              {/* Badge Premium */}
+              <div className="badge-hero mb-4">
+                <span className="badge-dot" />
+                <span className="badge-text">
+                  {t.home.hero.badge || 'Premium Saç Ekimi Merkezi'}
+                </span>
               </div>
 
               {/* Main Heading */}
@@ -71,9 +66,9 @@ export function HeroSection() {
                   {t.home.hero.title.highlight}
                 </span>
                 <span className="block mt-1 lg:mt-3">
-                <span className="text-foreground">
-                  {t.home.hero.title.main}
-                </span>
+                  <span className="text-foreground">
+                    {t.home.hero.title.main}
+                  </span>
                 </span>
               </h1>
 
@@ -85,8 +80,8 @@ export function HeroSection() {
               {/* CTA Buttons */}
               <div className="mt-6 md:mt-8 lg:mt-10 grid gap-3 w-full sm:inline-flex">
                 <Link to="/hair-analysis">
-                  <Button 
-                    size="lg" 
+                  <Button
+                    size="lg"
                     className={cn(
                       "w-full sm:w-auto relative group overflow-hidden",
                       "bg-primary hover:bg-primary/90 text-white",
@@ -96,8 +91,8 @@ export function HeroSection() {
                     <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-primary group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-primary to-secondary border-2 border-primary group-hover:bg-primary"></span>
                     <span className="relative flex items-center justify-center gap-2">
-                    {t.home.hero.cta.analysis}
-                    <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                      {t.home.hero.cta.analysis}
+                      <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </span>
                   </Button>
                 </Link>
@@ -129,7 +124,7 @@ export function HeroSection() {
                     onMouseEnter={() => setHoveredStat(index)}
                     onMouseLeave={() => setHoveredStat(null)}
                   >
-                    <div 
+                    <div
                       className={cn(
                         "relative p-4 rounded-2xl transition-all duration-300",
                         "bg-gradient-to-r border border-border/50",
@@ -138,16 +133,18 @@ export function HeroSection() {
                       )}
                     >
                       <div className="flex items-center gap-x-5">
-                        <div className={cn(
-                          "flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center",
-                          "bg-white shadow-sm",
-                          hoveredStat === index ? stat.iconColor : "text-primary"
-                        )}>
+                        <div
+                          className={cn(
+                            "flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center",
+                            "bg-white shadow-sm",
+                            hoveredStat === index ? stat.iconColor : "text-primary"
+                          )}
+                        >
                           <stat.icon className="w-6 h-6" />
                         </div>
                         <div>
                           <div className="text-2xl font-bold text-foreground">
-                          {stat.value}
+                            {stat.value}
                           </div>
                           <p className="mt-1 text-sm text-muted-foreground">
                             {stat.label}
@@ -162,7 +159,7 @@ export function HeroSection() {
 
             {/* Mobile Stats */}
             <div className="mt-6 grid grid-cols-2 gap-3 lg:hidden">
-              {stats.map((stat, index) => (
+              {stats.map((stat) => (
                 <div
                   key={stat.label}
                   className={cn(
@@ -171,11 +168,13 @@ export function HeroSection() {
                     "hover:bg-accent/5 transition-all duration-300"
                   )}
                 >
-                  <div className={cn(
-                    "w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2",
-                    "bg-primary/5",
-                    stat.iconColor
-                  )}>
+                  <div
+                    className={cn(
+                      "w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2",
+                      "bg-primary/5",
+                      stat.iconColor
+                    )}
+                  >
                     <stat.icon className="w-5 h-5" />
                   </div>
                   <div className="text-2xl font-bold text-foreground mb-1">
@@ -191,5 +190,5 @@ export function HeroSection() {
         </div>
       </div>
     </div>
-  );
+  )
 }
